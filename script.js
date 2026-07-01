@@ -1,9 +1,9 @@
-function login(){
+function login() {
 
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    if(username=="" || password==""){
+    if (username == "" || password == "") {
         alert("Please fill all fields");
         return;
     }
@@ -11,64 +11,105 @@ function login(){
     localStorage.setItem("username", username);
     localStorage.setItem("password", password);
 
-    window.location.href="dashboard.html";
+    window.location.href = "dashboard.html";
 }
-if(window.location.pathname.includes("dashboard.html")){
+
+if (window.location.pathname.includes("dashboard.html")) {
 
     let user = localStorage.getItem("username");
-    document.getElementById("welcome").innerHTML = "Welcome, " + user;
+    document.getElementById("welcome").innerHTML = "Welcome, " + user + " 👋";
 
     showBooks();
 }
 
-function addBook(){
+function addBook() {
 
-    let book = document.getElementById("book").value;
+    let id = document.getElementById("bookid").value;
+    let name = document.getElementById("book").value;
+    let author = document.getElementById("author").value;
+    let category = document.getElementById("category").value;
 
-    if(book==""){
-        alert("Enter Book Name");
+    if (id == "" || name == "" || author == "" || category == "") {
+        alert("Fill all fields");
         return;
     }
 
     let books = JSON.parse(localStorage.getItem("books")) || [];
 
-    books.push(book);
+    books.push({
+        id: id,
+        name: name,
+        author: author,
+        category: category
+    });
 
     localStorage.setItem("books", JSON.stringify(books));
 
-    document.getElementById("book").value="";
+    document.getElementById("bookid").value = "";
+    document.getElementById("book").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("category").value = "";
 
     showBooks();
 }
 
-function showBooks(){
+function showBooks() {
 
     let books = JSON.parse(localStorage.getItem("books")) || [];
 
-    let list="";
+    let search = "";
 
-    for(let i=0;i<books.length;i++){
+    let searchBox = document.getElementById("search");
 
-        list += "<li>"+books[i]+" <button onclick='deleteBook("+i+")'>Delete</button></li>";
-
+    if (searchBox) {
+        search = searchBox.value.toLowerCase();
     }
 
-    document.getElementById("bookList").innerHTML=list;
+    let output = "";
+
+    let total = 0;
+
+    for (let i = 0; i < books.length; i++) {
+
+        if (
+            books[i].name.toLowerCase().includes(search) ||
+            books[i].author.toLowerCase().includes(search) ||
+            books[i].category.toLowerCase().includes(search) ||
+            books[i].id.toLowerCase().includes(search)
+        ) {
+
+            output += `
+            <li>
+            <b>${books[i].id}</b><br>
+            📖 ${books[i].name}<br>
+            ✍️ ${books[i].author}<br>
+            📂 ${books[i].category}<br><br>
+            <button onclick="deleteBook(${i})">Delete</button>
+            <hr>
+            </li>
+            `;
+
+            total++;
+        }
+    }
+
+    document.getElementById("bookList").innerHTML = output;
+    document.getElementById("count").innerHTML = total;
 }
 
-function deleteBook(index){
+function deleteBook(index) {
 
     let books = JSON.parse(localStorage.getItem("books")) || [];
 
-    books.splice(index,1);
+    books.splice(index, 1);
 
-    localStorage.setItem("books",JSON.stringify(books));
+    localStorage.setItem("books", JSON.stringify(books));
 
     showBooks();
 }
 
-function logout(){
+function logout() {
 
-    window.location.href="index.html";
+    window.location.href = "index.html";
 
 }
