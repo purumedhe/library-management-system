@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<title>Library Dashboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="login-box">
-    <h2>Library Dashboard</h2>
 
-    <h3 id="welcome"></h3>
+<h2>📚 Library Dashboard</h2>
 
-    <input type="text" id="book" placeholder="Enter Book Name">
+<h3 id="welcome"></h3>
 
-    <button onclick="addBook()">Add Book</button>
+<input type="text" id="bookid" placeholder="Book ID">
 
-    <h3>Books</h3>
+<input type="text" id="book" placeholder="Book Name">
 
-    <ul id="bookList"></ul>
+<input type="text" id="author" placeholder="Author Name">
 
-    <button onclick="logout()">Logout</button>
+<input type="text" id="category" placeholder="Category">
+
+<button onclick="addBook()">Add Book</button>
+
+<input type="text" id="search" placeholder="Search Book" onkeyup="showBooks()">
+
+<h3>Total Books : <span id="count">0</span></h3>
+
+<ul id="bookList"></ul>
+
+<button onclick="logout()">Logout</button>
+
 </div>
 
 <script src="script.js"></script>
