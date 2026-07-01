@@ -1,33 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Library Dashboard</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
 
+<link rel="stylesheet" href="style.css">
+
+</head>
 <body>
 
-<div class="login-box">
+<div class="container">
 
-<h2>📚 Library Dashboard</h2>
+<h1>📚 Library Dashboard</h1>
 
 <h3 id="welcome"></h3>
 
-<input type="text" id="bookid" placeholder="Book ID">
+<input type="text" id="bookId" placeholder="Book ID">
 
-<input type="text" id="book" placeholder="Book Name">
+<input type="text" id="bookName" placeholder="Book Name">
 
-<input type="text" id="author" placeholder="Author Name">
+<input type="text" id="author" placeholder="Author">
 
 <input type="text" id="category" placeholder="Category">
 
 <button onclick="addBook()">Add Book</button>
 
-<input type="text" id="search" placeholder="Search Book" onkeyup="showBooks()">
+<br><br>
 
-<h3>Total Books : <span id="count">0</span></h3>
+<input
+type="text"
+id="search"
+placeholder="Search Book..."
+onkeyup="searchBooks()">
 
-<ul id="bookList"></ul>
+<h3>Total Books : <span id="totalBooks">0</span></h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Author</th>
+
+<th>Category</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="bookTable">
+
+</tbody>
+
+</table>
+
+<br>
 
 <button onclick="logout()">Logout</button>
 
